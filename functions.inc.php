@@ -122,7 +122,7 @@ function sccp_list_keysets() {
     foreach ($ast_out as $line) {
 	if (strlen($line) > 3) {
 	    $line = substr($line,2);
-	    list ($line,$junk) = split(' ',$line);
+	    list ($line,$junk) = explode(' ',$line);
 	    if (strlen($ast_key[$line]) < 1) {
 		$ast_key[$line] = $line;;
 	    }
@@ -660,7 +660,7 @@ function sccp_get_confData($type) {
 		$confData['type'] = $type;
 	    }
 	    if ($file_context == "$search" && strpos($input,"=")) {
-		list($field,$value) = split("=",$input);
+		list($field,$value) = explode("=",$input);
 		if ($field == 'allow') {
 		    $confData['allow'] .= $value . ',';
 		} else {
@@ -992,7 +992,7 @@ function sccp_edit_devmodel($devmodel) {
     global $db;
 
     foreach ($devmodel as $field => $value) {
-	list ($field, $model) = split('_',$field);
+	list ($field, $model) = explode('_',$field);
 	if ($field == "del" && $value == 'on') {
 	    $dquery = "DELETE FROM sccpdevmodel WHERE model = '$model';";
             $result = $db->query($dquery);
